@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: always
+    # volumes:
+    #   - ./data:/data/db
+    networks:
+      - shopping-net
+  api:
+    build: 
+      context: ../../.
+    restart: on-failure
+    ports:
+      - 7777:7777
+    depends_on:
+        - mongo
+    volumes:
+      - ../../data:/usr/src/app/data
+      - ../../src:/usr/src/app/src
+    network_mode: host
+
+networks:
+  shopping-net:
