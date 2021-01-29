@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Controller,
   Post,
   Body,
-  Get,
   Request,
   UseGuards,
   Res,
@@ -68,21 +68,5 @@ export class AuthController {
       refreshTokenDto,
     );
     return res.status(HttpStatus.OK).json(userUpdated);
-  }
-
-  @ApiBearerAuth()
-  @ApiResponse({
-    status: 200,
-    description: 'Fetch user by token',
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Unauthorized',
-  })
-  @UseGuards(AuthGuard('jwt'))
-  @Get('me')
-  async getMe(@Request() req, @Res() res) {
-    const { user } = req;
-    return res.status(HttpStatus.OK).json(user);
   }
 }

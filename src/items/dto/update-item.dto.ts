@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateListitemDto } from './create-listitem.dto';
+import { CreateItemDto } from './create-item.dto';
 import { ApiProperty } from '@nestjs/swagger';
-export class UpdateListitemDto extends PartialType(CreateListitemDto) {
+export class UpdateItemDto extends PartialType(CreateItemDto) {
   @ApiProperty({ default: 'New name of the item' })
   name: string;
   @ApiProperty({ default: '1000' })

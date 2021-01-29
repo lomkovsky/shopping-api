@@ -23,11 +23,6 @@ export class UsersController {
     status: 201,
     description: 'The new user has been successfully created.',
   })
-  @ApiResponse({
-    status: 400,
-    description:
-      'Bad Request: name, email or ObjectId of existing company are required',
-  })
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);

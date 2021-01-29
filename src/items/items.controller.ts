@@ -8,23 +8,23 @@ import {
   Delete,
   UseGuards,
   Request,
-  HttpStatus,
   Res,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ListitemsService } from './listitems.service';
-import { CreateListitemDto } from './dto/create-listitem.dto';
-import { UpdateListitemDto } from './dto/update-listitem.dto';
+import { ItemsService } from './items.service';
+import { CreateItemDto } from './dto/create-item.dto';
+import { UpdateItemDto } from './dto/update-item.dto';
 import {
   ApiBearerAuth,
   ApiResponse,
-  ApiTags,
   ApiNotFoundResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 
-@Controller('listitems')
-export class ListitemsController {
-  constructor(private readonly listitemsService: ListitemsService) {}
+@ApiTags('items')
+@Controller('items')
+export class ItemsController {
+  constructor(private readonly itemsService: ItemsService) {}
 
   @ApiBearerAuth()
   @ApiResponse({
@@ -41,8 +41,8 @@ export class ListitemsController {
   })
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Request() req, @Body() createListitemDto: CreateListitemDto) {
-    return this.listitemsService.create(req, createListitemDto);
+  create(@Request() req, @Body() createItemDto: CreateItemDto) {
+    return this.itemsService.create(req, createItemDto);
   }
 
   @ApiResponse({
@@ -51,7 +51,7 @@ export class ListitemsController {
   })
   @Get()
   findAll() {
-    return this.listitemsService.findAll();
+    return this.itemsService.findAll();
   }
 
   @ApiResponse({
@@ -67,7 +67,7 @@ export class ListitemsController {
   })
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.listitemsService.findOne(id);
+    return this.itemsService.findOne(id);
   }
 
   @ApiBearerAuth()
@@ -91,9 +91,9 @@ export class ListitemsController {
   update(
     @Request() req,
     @Param('id') id: string,
-    @Body() updateListitemDto: UpdateListitemDto,
+    @Body() updateItemDto: UpdateItemDto,
   ) {
-    return this.listitemsService.update(req, id, updateListitemDto);
+    return this.itemsService.update(req, id, updateItemDto);
   }
 
   @ApiBearerAuth()
@@ -115,6 +115,6 @@ export class ListitemsController {
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   remove(@Res() res, @Request() req, @Param('id') id: string) {
-    return this.listitemsService.remove(req, res, id);
+    return this.itemsService.remove(req, res, id);
   }
 }

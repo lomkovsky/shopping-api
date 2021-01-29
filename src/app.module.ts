@@ -11,7 +11,8 @@ import {
 } from './http-exception.filter';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { ListitemsModule } from './listitems/listitems.module'
+import { ItemsModule } from './items/items.module';
+import { ShoppinglistModule } from './shoppinglist/shoppinglist.module';
 
 console.log('process.env.NODE_ENV ', process.env.NODE_ENV);
 const envFound = `./.env.${process.env.NODE_ENV || 'development'}`;
@@ -36,7 +37,8 @@ if (!envFound) throw new Error("Couldn't find .env file");
     MongooseModule.forRoot(process.env.MONGODB),
     UsersModule,
     AuthModule,
-    ListitemsModule,
+    ItemsModule,
+    ShoppinglistModule,
   ],
   controllers: [AppController],
   providers: [
