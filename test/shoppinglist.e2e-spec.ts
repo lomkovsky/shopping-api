@@ -6,7 +6,6 @@ import { AppModule } from '../src/app.module';
 import { connectWithRetry } from './fixtures/mongooseInit';
 import {
   SetupDatabase,
-  userOne,
   itemOneUserOne,
   userTree,
   itemForCreate,
